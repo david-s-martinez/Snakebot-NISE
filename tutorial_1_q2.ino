@@ -1,6 +1,6 @@
 
 #define DISCRIPTION_LENGTH     15
-#define NOMBER_RS_NEURONS     2
+#define NOMBER_RS_NEURONS     4
 unsigned long int myTime;
 unsigned int mydelay = 10; // ms
 /******************************************************/ 
@@ -49,6 +49,7 @@ struct Pattern{
    ------------------------> 
 */
 Pattern OSCILLATORY={4.6,1.5,0.1,1};
+Pattern OSCILLATORY2ble={17.4,1.5,0.1,1};
 
 
 /*
@@ -158,7 +159,8 @@ Serial.begin(115200);
 
 /* set the configuration of the RS neuron to match a desired output: OSCILLATORY, QUIESCENT, PLATEAU, ALMOSTOSC */
 setup_RS_neurons(&rs_neuron[0],OSCILLATORY,"Fist neuron");
-setup_RS_neurons(&rs_neuron[1],PLATEAU,"Second neuron");
+
+setup_RS_neurons(&rs_neuron[1],OSCILLATORY2ble,"Fist neuron with double frequency");
 
 }
 
@@ -171,13 +173,13 @@ void loop() {
 myTime = millis();
 
 /* After 5 seconds, inject a current in the first neuron for a duration of 0.01 second*/
-if((myTime>5000)&&(myTime<5010))
+if((myTime>3000)&&(myTime<3200))    //if((myTime>5000)&&(myTime<5010))
 rs_neuron[0].inj_cur = 1;
 else
 rs_neuron[0].inj_cur = 0;
 
-/* After 8 seconds, inject a current in the second neuron for a duration of 0.2 second*/
-if((myTime>8000)&&(myTime<8200))
+/* After 5 seconds, inject a current in the first neuron for a duration of 0.01 second*/
+if((myTime>3000)&&(myTime<3200))    //if((myTime>5000)&&(myTime<5010))
 rs_neuron[1].inj_cur = 1;
 else
 rs_neuron[1].inj_cur = 0;
