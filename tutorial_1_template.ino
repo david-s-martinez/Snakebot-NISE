@@ -1,6 +1,6 @@
 
-#define DISCRIPTION_LENGTH     15
-#define NOMBER_RS_NEURONS     2
+#define DESCRIPTION_LENGTH     15
+#define NUMBER_RS_NEURONS     2
 unsigned long int myTime;
 unsigned int mydelay = 10; // ms
 /******************************************************/ 
@@ -13,7 +13,7 @@ unsigned int mydelay = 10; // ms
 //struct RSneuron 
 /******************************************************/ 
 struct RSneuron { 
-   char discription[DISCRIPTION_LENGTH]; // name 
+   char discription[DESCRIPTION_LENGTH]; // name 
    double tao_m   = 0.1;  
    double tao_s   = 20*tao_m; 
    double Af      = 5; 
@@ -27,7 +27,7 @@ struct RSneuron {
    double inj_cur = 0; 
    double inj_cur_MultiplicationFactor = 1; 
    
-} rs_neuron[NOMBER_RS_NEURONS]; 
+} rs_neuron[NUMBER_RS_NEURONS]; 
 /******************************************************/ 
 //struct Pattern 
 /******************************************************/ 
@@ -147,7 +147,7 @@ rs_n->inj_cur_MultiplicationFactor = myP.InjCurrentMultiplicationFactor;
 /******************************************************/ 
 void update_locomotion_network(void)
 {
-for (int i = 0; i< NOMBER_RS_NEURONS ; i++)
+for (int i = 0; i< NUMBER_RS_NEURONS ; i++)
   update_RS_neuron(&rs_neuron[i]);
 }
 /******************************************************/ 
@@ -186,7 +186,7 @@ rs_neuron[1].inj_cur = 0;
 update_locomotion_network();
 
 /* Printing the output of the neurons on serial port*/
-for (int i = 0; i< NOMBER_RS_NEURONS ; i++)
+for (int i = 0; i< NUMBER_RS_NEURONS ; i++)
 {Serial.print(rs_neuron[i].V);Serial.print(" ");}
 Serial.print("\n");
 

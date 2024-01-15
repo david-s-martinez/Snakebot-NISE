@@ -1,4 +1,4 @@
-#define NOMBER_MI_NEURONS 2
+#define NUMBER_MI_NEURONS 2
 unsigned long int myTime;
 unsigned int mydelay = 10; // ms
 /******************************************************/
@@ -16,7 +16,7 @@ struct MIneuron
   double x = x_0;
   double x_hat = 0;
 
-} mi_neuron[NOMBER_MI_NEURONS];
+} mi_neuron[NUMBER_MI_NEURONS];
 /******************************************************/
 // int myMax(double a, double b) {
 //   return (a > b) ? a : b;
@@ -25,7 +25,7 @@ struct MIneuron
 inline double fun_x(double x, double x_hat, double s_j, double b, int curr_neuron)
 {
   double part_sigm;
-  int a_Size = NOMBER_MI_NEURONS - 1;
+  int a_Size = NUMBER_MI_NEURONS - 1;
   int index;
   int j = curr_neuron;
 
@@ -104,7 +104,7 @@ void update_y_vals(struct MIneuron *mi_n)
 /******************************************************/
 void update_locomotion_network(void)
 {
-  for (int i = 0; i < NOMBER_MI_NEURONS; i++)
+  for (int i = 0; i < NUMBER_MI_NEURONS; i++)
   {
     update_y_vals(&mi_neuron[i]);
     update_MI_neuron(&mi_neuron[i], i);
@@ -142,7 +142,7 @@ void loop()
   /* Update the neurons output*/
   update_locomotion_network();
 
-  for (int i = 0; i < NOMBER_MI_NEURONS; i++)
+  for (int i = 0; i < NUMBER_MI_NEURONS; i++)
   {
     Serial.print(mi_neuron[i].y);
     Serial.print(" ");
