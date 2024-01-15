@@ -1,4 +1,6 @@
+// IMPORTANT: FOR THREE NEURONS CONFIGURATION CHANGE THIS VARIABLE TO THREE
 #define NOMBER_MI_NEURONS 4
+
 unsigned long int myTime;
 unsigned int mydelay = 10; // ms
 /******************************************************/ 
@@ -8,8 +10,10 @@ struct MIneuron {
    double T       = 12;
    double b       = 2.5;
    double x_0     = 0;
-   double a[3]     = {1.5, 0, 1.5};
-
+   // USE BELOW ARRAY FOR FOUR NEURONS CONFIGURATION
+   double a[3]     = {2.5, 0, 0};
+  // USE BELOW ARRAY FOR THREE NEURONS CONFIGURATION
+   //double a[2]     = {1.5, 0};
    double s_j     = 1;
    double y       = 0;
    double x       = x_0;
@@ -118,18 +122,13 @@ void loop() {
   myTime = millis();
   
   // Give a step current
-  for (int i = 0; i < NOMBER_MI_NEURONS; i++)
-  {
-    if ((myTime > 3000))
-    {
-      mi_neuron[i].s_j = 1;
-    }
-    else
-    {
+  for (int i=0; i<NOMBER_MI_NEURONS; i++){
+    if((myTime>3000)){ 
+      mi_neuron[i].s_j = 1;}
+    else {
       mi_neuron[i].s_j = 0;
     }
   }
-  
   /* Update the neurons output*/
   update_locomotion_network();
   
@@ -141,3 +140,4 @@ void loop() {
   delay(mydelay);
 
 }
+
