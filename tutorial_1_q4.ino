@@ -10,10 +10,14 @@ struct MIneuron {
    double T       = 12;
    double b       = 2.5;
    double x_0     = 0;
-   // USE BELOW ARRAY FOR FOUR NEURONS CONFIGURATION
-   double a[3]     = {2.5, 0, 0};
-  // USE BELOW ARRAY FOR THREE NEURONS CONFIGURATION
-   //double a[2]     = {1.5, 0};
+  // USE THE ARRAY BELOW FOR THREE NEURONS CONFIGURATION
+   //double a[2]     = {2.5, 0.0};  // 3a
+   //double a[2]     = {2.5, 2.5};  // 3b
+   // USE THE ARRAY BELOW FOUR NEURONS CONFIGURATION
+   double a[3]     = {2.5, 0.0, 0.0};  // 4a
+   //double a[3]     = {1.5, 1.5, 0.0};  // 4b
+   //double a[3]     = {1.5, 0.0, 1.5};  // 4c
+   //double a[3]     = {2.5, 2.5, 2.5};  // 4d
    double s_j     = 1;
    double y       = 0;
    double x       = x_0;
