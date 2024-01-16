@@ -1,5 +1,6 @@
 #define NOMBER_MI_NEURONS 20
 unsigned long int myTime;
+unsigned long int newTime;
 unsigned int mydelay = 10; // ms
 
 /******************************************************/ 
@@ -64,17 +65,11 @@ void update_MI_neuron(struct MIneuron* mi_n_1, int curr_neuron){
     l1 = h*fun_xhat( x_1[i] , xhat_1[i]  , mi_n_1->y, mi_n_1->T );
     k1= h*fun_x( x_1[i] , xhat_1[i],  mi_n_1->s_j, mi_n_1->b, curr_neuron);
     
-    l2 = h*fun_xhat( x_1[i] +k1/2, xhat_1[i] +l1/2, mi_n_1->y, mi_n_1->T );
-    k2= h*fun_x( x_1[i] +k1/2, xhat_1[i] +l1/2, mi_n_1->s_j, mi_n_1->b, curr_neuron);
+    l2 = h*fun_xhat( x_1[i] +2*k1/3, xhat_1[i] +2*l1/3, mi_n_1->y, mi_n_1->T );
+    k2= h*fun_x( x_1[i] +2*k1/3, xhat_1[i] +2*l1/3, mi_n_1->s_j, mi_n_1->b, curr_neuron);
     
-    l3 = h*fun_xhat( x_1[i]+k2/2 , xhat_1[i] +l2/2, mi_n_1->y, mi_n_1->T );
-    k3= h*fun_x( x_1[i] +k2/2, xhat_1[i] +l2/2, mi_n_1->s_j, mi_n_1->b, curr_neuron);
-     
-    l4 = h*fun_xhat( x_1[i]+k3 , xhat_1[i] +l3, mi_n_1->y, mi_n_1->T );
-    k4= h*fun_x( x_1[i] +k3, xhat_1[i] +l3, mi_n_1->s_j, mi_n_1->b, curr_neuron);
-    
-    l = 1/6.0 * (l1 + 2*l2 + 2*l3 + l4);
-    k = 1/6.0 * (k1 + 2*k2 + 2*k3 + k4);
+    l = 1/4.0 * (l1 + 3*l2);
+    k = 1/4.0 * (k1 + 3*k2);
    
     x_1[i+1]= x_1[i]+k;
     xhat_1[i+1]= xhat_1[i]+l ;
@@ -128,9 +123,16 @@ void loop() {
   /* Update the neurons output*/
   update_locomotion_network();
 
-  for (int i = 0; i< NOMBER_MI_NEURONS ; i++)  {    
-    Serial.print(mi_neuron[i].y);Serial.print(",");}
+  // for (int i = 0; i< NOMBER_MI_NEURONS ; i++)  {    
+  //   Serial.print(mi_neuron[i].y);Serial.print(",");}
+  // Serial.print("\n");
+
+  newTime = millis();
+
+  Serial.print("Time to obtain a set of values: ");Serial.print(newTime-myTime);
   Serial.print("\n");
+
+  // 220 ms
   
   /* delay at the end */
   delay(mydelay);
